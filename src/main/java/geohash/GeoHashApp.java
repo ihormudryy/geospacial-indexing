@@ -4,6 +4,7 @@ import ch.hsr.geohash.GeoHash;
 import ch.hsr.geohash.WGS84Point;
 import geohash.utils.StopWatchOwn;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ import static geohash.utils.ScoringUtils.getTotalUsersSeenByWalk;
 public class GeoHashApp {
 
   public static final String PREFIX = "/tmp/location/";
-  static final int characters = 7;
+  public static final int characters = 7;
   static final int radiusAroundPoint = 60;
   static final int numberOfCoordinates = 200;
   static final int numberOfPois = numberOfCoordinates / 10;

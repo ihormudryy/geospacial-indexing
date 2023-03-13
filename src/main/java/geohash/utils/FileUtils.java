@@ -134,4 +134,34 @@ public class FileUtils {
       e.printStackTrace();
     }
   }
+
+  public static void saveToFile(double lat, double lon, String hash, String name, long timestamp) {
+
+    LocalDateTime dateTime = LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
+
+    int year = dateTime.getYear();
+    int month = dateTime.getMonthValue();
+    int day = dateTime.getDayOfMonth();
+    int hour = dateTime.getHour();
+
+    Path path = Paths.get(hash, String.valueOf(year), String.format("%s.%s.%s", month, day, hour));
+    final String fileName = name + ".bin";
+    final String filePath = path + File.separator + fileName;
+    final File folder = new File(path.toString());
+
+    if (!folder.exists()) {
+      try {
+        Files.createDirectories(path);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+    try {
+      Path pathFile = Paths.get(filePath);
+      Files.write(pathFile, transformCoors(new double[][]{{lat, lon}}));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }
